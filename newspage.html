@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trending</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){            
+            $.ajax({
+                type:"GET",
+                url:"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=90dae9f5f3e14560834026bd02fde424",
+                // beforeSend:function(){
+                    
+                //     $("#loader1").show();
+                // },
+                success:function(data){
+                    // $("#loader1").hide();                                           
+                    var artcle = (data['articles']); 
+                    var newst ="";
+                    
+                    for(var i in artcle){                        
+                        var myTitle =artcle[i].title;
+                        var newsurl = artcle[i].url;
+                        var newsimg = artcle[i].urlToImage;
+                        var newsdescptn = artcle[i].description;
+                        newst += "<div class='card' style='width: 18rem;'> <img class='card-img-top' src='";
+                        newst += newsimg+"' alt='" +myTitle;
+                        newst += "'> <div class='card-body'>  <h5 class='card-title'>";
+                        newst +=  myTitle + "</h5> <p class='card-text'>";
+                        newst +=  newsdescptn + "</p>  <a href='" +newsurl+ "'>"+More..+"</a>  </div>  </div>";                                                     
+                        
+            
+                    } 
+                    $("#displaynews").html(newst);
+                    console.log("here");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="./ajax-loader.gif" alt="Loading" id="loader1">
+        <div class="row" id="displaynews">
+            
+        </div>
+    </div>
+</body>
+</html>

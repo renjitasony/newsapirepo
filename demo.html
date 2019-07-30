@@ -1,0 +1,35 @@
+<div class='col col-12 col-sm-4'>
+        <a href=''>
+            <img src='' alt=''>
+            <div class='title'>
+                <div class='l-col'>
+                    <h2></h2>
+                </div>
+                <span class='r-col'>
+                        <img src='https://images.firstpost.com/wp-content/uploads/stories-arrow-nw.png'>
+                </span>
+            </div>
+        </a>
+    </div>
+
+
+    <div class='card' style='width: 18rem;'>
+            <img class='card-img-top' src='' alt='Card image cap'>
+            <div class='card-body'>
+              <h5 class='card-title'>Card title</h5>
+              <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href='#' class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+          for(var i in artcle){                        
+            var myTitle =artcle[i].title;
+            var newsurl = artcle[i].url;
+            var newsimg = artcle[i].urlToImage;
+            newst += "<div class='col col-12'>  <a href='";
+            newst += newsurl+"'> <img src='";
+            newst += newsimg+"' alt='";
+            newst += myTitle+"'>  <div class='l-col'> <h2>";
+            newst += myTitle+"</h2> </div>  <span class='r-col'>  <img src='https://images.firstpost.com/wp-content/uploads/stories-arrow-nw.png'>  </span>  </div>  </a>  </div>";       
+
+        }
