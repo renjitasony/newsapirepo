@@ -13,12 +13,12 @@
             $.ajax({
                 type:"GET",
                 url:"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=90dae9f5f3e14560834026bd02fde424",
-                // beforeSend:function(){
+                beforeSend:function(){
                     
-                //     $("#loader1").show();
-                // },
+                    $("#loader1").show();
+                },
                 success:function(data){
-                    // $("#loader1").hide();                                           
+                    $("#loader1").hide();                                           
                     var artcle = (data['articles']); 
                     var newst ="";
                     
@@ -31,7 +31,7 @@
                         newst += newsimg+"' alt='" +myTitle;
                         newst += "'> <div class='card-body'>  <h5 class='card-title'>";
                         newst +=  myTitle + "</h5> <p class='card-text'>";
-                        newst +=  newsdescptn + "</p>  <a href='" +newsurl+ "'>"+More..+"</a>  </div>  </div>";                                                     
+                        newst +=  newsdescptn + "</p>  <a href='" +newsurl+ "'>More..</a>  </div>  </div>";                                                     
                         
             
                     } 
