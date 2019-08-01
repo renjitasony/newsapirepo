@@ -12,7 +12,8 @@
         $(document).ready(function(){            
             $.ajax({
                 type:"GET",
-                url:"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=90dae9f5f3e14560834026bd02fde424",
+                // url:"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=90dae9f5f3e14560834026bd02fde424",
+                url:"https://newsapi.org/v2/top-headlines?country=in&apiKey=90dae9f5f3e14560834026bd02fde424",
                 beforeSend:function(){
                     
                     $("#loader1").show();
@@ -39,6 +40,52 @@
                     console.log("here");
                 }
             });
+            $("#searchit").click(function(){
+                $.ajax({
+                type:"GET",               
+                url:"https://newsapi.org/v2/top-headlines?country=in&apiKey=90dae9f5f3e14560834026bd02fde424",
+                beforeSend:function(){
+                    
+                    $("#loader1").show();
+                },
+                success:function(data){
+                    $("#loader1").hide();                                                               
+                    var artcle = (data['articles']); 
+                    var newst ="";
+                    var filterval = $("#filcat").val();
+                    for(var i in artcle){                        
+                        var myTitle =artcle[i].title;
+                        var newsurl = artcle[i].url;
+                        var newsimg = artcle[i].urlToImage;
+                        var newsdescptn = artcle[i].description;
+                        var newscontent = artcle[i].content;
+                        
+                        if(filterval != ""){
+                           var filtervalu = filterval.toLowerCase();
+                            if(
+                                ((newscontent!=null)&& (!newscontent.toLowerCase().includes(filtervalu)))
+                                || ((newsdescptn!=null)&& (!newsdescptn.toLowerCase().includes(filtervalu)))
+                                ||
+                                 ((myTitle!=null)&& (!myTitle.toLowerCase().includes(filtervalu)))
+                            ){
+                                continue;                  
+                            }
+                           
+                        }
+                        console.log(filterval);
+                        newst += "<div class='card' style='width: 18rem;'> <img class='card-img-top' src='";
+                        newst += newsimg+"' alt='" +myTitle;
+                        newst += "'> <div class='card-body'>  <h5 class='card-title'>";
+                        newst +=  myTitle + "</h5> <p class='card-text'>";
+                        newst +=  newsdescptn + "</p>  <a href='" +newsurl+ "'>More..</a>  </div>  </div>";                                                     
+                        
+            
+                    } 
+                    $("#displaynews").html(newst);
+                    console.log("here");
+                }
+            }); 
+            });
         });
     </script>
 </head>
@@ -46,8 +93,8 @@
         <nav class="navbar navbar-light bg-red" style="background-color: crimson;">
                 <h1 class="display-4">Trending Now!</h1>
                 <form class="form-inline">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="filcat">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="searchit">Search</button>
                 </form>
               </nav>
     <div class="container">
